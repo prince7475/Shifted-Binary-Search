@@ -1,0 +1,84 @@
+Write a function that takes in a sorted array of integers as well as a target integer.
+The caveat is that the numbers in the array have been shifted by some amount;
+in other words, they have been moved to the left or the right by one or more 
+positions. For example, [1, 2, 3, 4] might become [3, 4, 1, 2]. The function should use a
+variation of the Binary Search algorithm to find if the target number is contained 
+in the array and should return its index if it is, otherwise -1.
+Sample input: [45, 61, 71, 72, 73, 0, 1, 21, 33, 45], 33
+Sample output: 8
+
+function shiftedBinarySearch(array, target) {
+    return binarySearchHelper(array,target,0,array.length - 1)
+}
+
+
+function binarySearchHelper(array,target,leftP,rightP){
+ let left = leftP
+ let right = rightP
+ 
+ while(left <= right){
+  let midIdx = Math.floor((left + right) / 2)
+  let midValue = array[midIdx]
+  if(midValue === target){
+    return midIdx
+  }else if(target >= array[left] && target < midValue){
+    right = midIdx - 1
+  }else {
+    left = midIdx + 1
+  }
+ }
+ return -1
+}
+
+
+main(array,target) {
+ return binarySearchHelper(array,target,0, array.length - 1)
+}
+
+
+
+
+main(array, target){
+  return binaryHelper(array,target, 0, array.length - 1)
+}
+
+
+
+function binaryHelper(array,target,left,right){
+  if(left > right) return -1
+  let midIdx = Math.floor((left + right) / 2)
+  let midValue = array[midIdx]
+  if(midValue === target){
+    return midIdx
+  }else if (array[left] < array[midIdx]){
+    if(target >= array[left] && target < array[midIdx]){
+      return binaryHelper(array,target,left,midIdx - 1)
+    }else {
+      return binaryHelper(array,target, midIdx + 1, right)
+    }
+  }else {
+    if(target <= array[right] && target > midValue){
+      return binaryHelper(array,target,midIdx + 1, right)
+    }else {
+      return binaryHelper(array,target,left,midIdx - 1)
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
